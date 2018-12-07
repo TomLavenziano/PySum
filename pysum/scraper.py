@@ -4,7 +4,7 @@ import re
 
 def scrapeArticle(url):
     url = _verifyURL(url)
-    print('URL: ' + url + '\n\n')
+    print('Article URL: ' + url + '\n\n')
 
     articleHTML = _getRawHTML(url)
 
