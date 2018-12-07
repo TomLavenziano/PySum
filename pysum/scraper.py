@@ -7,14 +7,12 @@ def scrapeArticle(url):
     print('URL: ' + url + '\n\n')
 
     articleHTML = _getRawHTML(url)
-    articleExtractedText = _extractTextFromHTML(articleHTML)
 
-    return articleExtractedText
+    extractedText = _extractTextFromHTML(articleHTML)
+    sanitizedText = _stripWikiBrackets(extractedText) if 'wikipedia' in url else extractedText
 
-    # articleText = _stripWikiBrackets(articleExtractedText) if 'wikipedia' in url else articleExtractedText
-    # articleTextReduced = _reduceToAlpha(articleText)
-    #
-    # return (articleText, articleTextReduced)
+    return sanitizedText
+
 
 
 
@@ -24,7 +22,6 @@ def _verifyURL(url): return url if 'http' in url else 'http://' + url
 
 def _stripWikiBrackets(text): return re.sub(r'\s+', ' ', re.sub(r'\[[0-9]*\]', ' ', text))
 
-def _reduceToAlpha(text): return re.sub(r'\s+', ' ', re.sub('[^a-zA-Z]', ' ', text))
 
 
 ### HTML processing ###
